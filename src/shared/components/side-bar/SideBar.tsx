@@ -1,16 +1,17 @@
-import { Avatar, Divider, Drawer, Icon, List, ListItemButton, ListItemIcon, ListItemText, useMediaQuery, useTheme } from '@mui/material';
+import { Avatar, Divider, Drawer,  List, useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 
 import { Children } from '../../../types';
 
 import { UseDrawerContext } from '../../contexts/';
+import ListItemLink from './ListItemLink';
 
 function SideBar({children}: Children) {
 
     const theme = useTheme()
     const smDown = useMediaQuery(theme.breakpoints.down('sm'))
 
-    const { isDrawerOpen, toggleDrawer } = UseDrawerContext()
+    const { isDrawerOpen, toggleDrawer, drawerOptions } = UseDrawerContext()
 
     return (
         <>
@@ -31,12 +32,15 @@ function SideBar({children}: Children) {
 
                     <Box flex={1}>
                         <List component='nav'>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <Icon>home</Icon>    
-                                </ListItemIcon>
-                                <ListItemText primary='Página inicial'/>
-                            </ListItemButton>
+                            {drawerOptions.map(option => (
+                                <ListItemLink 
+                                    key={option.path}
+                                    icon={option.icon} 
+                                    label={option.label} 
+                                    to={option.path}
+                                    onClick={smDown ? toggleDrawer : undefined}
+                                />
+                            ))}
                         </List>
                     </Box>
 

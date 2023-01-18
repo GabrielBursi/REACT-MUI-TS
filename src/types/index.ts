@@ -1,3 +1,5 @@
 export * from './ThemeContextData'
 export * from './Children'
 export * from './DrawerContextData'
+export * from './DrawerOptions'
+export * from './ListItemLinkProps'

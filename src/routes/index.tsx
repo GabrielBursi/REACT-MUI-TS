@@ -1,11 +1,23 @@
 import { Button } from "@mui/material";
+import { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 import { UseDrawerContext } from "../shared/contexts";
 
 function AppRoutes() {
 
-    const { toggleDrawer } = UseDrawerContext()
+    const { toggleDrawer, toggleDrawerOptions } = UseDrawerContext()
+
+    useEffect(() => {
+        toggleDrawerOptions([
+            {
+                icon: "home",
+                label:"Página inicial",
+                path: "/"
+            }
+        ])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <Routes>

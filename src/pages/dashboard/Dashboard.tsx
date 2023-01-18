@@ -2,7 +2,7 @@ import {LayoutBase} from '../../shared/layouts';
 
 function Dashboard() {
     return (
-        <LayoutBase titulo='Página inicial'>
+        <LayoutBase titulo='Página inicial' barraDeFerramentas={<></>}>
             <span>childreb</span>
         </LayoutBase>
     );

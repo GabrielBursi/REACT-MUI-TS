@@ -7,9 +7,9 @@ import { Children, ThemeContextData } from "../../types";
 import { LightTheme, DarkTheme } from "../themes";
 
 
-export const ThemeContext = createContext({} as ThemeContextData)
+const ThemeContext = createContext({} as ThemeContextData)
 
-export function AppThemeContext(){
+function UseThemeContext(){
     return  useContext(ThemeContext) 
 }
 
@@ -39,4 +39,8 @@ function ThemeContextProvider({children}: Children) {
     );
 }
 
-export default ThemeContextProvider;
+export {
+    ThemeContext,
+    UseThemeContext,
+    ThemeContextProvider
+}

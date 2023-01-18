@@ -1,13 +1,16 @@
 import { BrowserRouter } from "react-router-dom";
 
 import AppRoutes from "./routes";
+import SideBar from "./shared/components/side-bar/SideBar";
 import { ThemeContextProvider } from "./shared/contexts";
 
 function App() {
   return (
     <ThemeContextProvider>
       <BrowserRouter>
-        <AppRoutes/>
+        <SideBar>
+          <AppRoutes/>
+        </SideBar>
       </BrowserRouter>
     </ThemeContextProvider>
   );

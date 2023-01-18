@@ -1,9 +1,9 @@
-import { Avatar, Divider, Drawer,  List, useMediaQuery, useTheme } from '@mui/material';
+import { Avatar, Divider, Drawer,  Icon,  List, ListItemButton, ListItemIcon, ListItemText, useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 
 import { Children } from '../../../types';
 
-import { UseDrawerContext } from '../../contexts/';
+import { UseDrawerContext, UseThemeContext } from '../../contexts/';
 import ListItemLink from './ListItemLink';
 
 function SideBar({children}: Children) {
@@ -12,6 +12,7 @@ function SideBar({children}: Children) {
     const smDown = useMediaQuery(theme.breakpoints.down('sm'))
 
     const { isDrawerOpen, toggleDrawer, drawerOptions } = UseDrawerContext()
+    const { toggleTheme, themeName } = UseThemeContext()
 
     return (
         <>
@@ -33,14 +34,24 @@ function SideBar({children}: Children) {
                     <Box flex={1}>
                         <List component='nav'>
                             {drawerOptions.map(option => (
-                                <ListItemLink 
+                                <ListItemLink
                                     key={option.path}
-                                    icon={option.icon} 
-                                    label={option.label} 
+                                    icon={option.icon}
+                                    label={option.label}
                                     to={option.path}
                                     onClick={smDown ? toggleDrawer : undefined}
                                 />
                             ))}
+                        </List>
+                    </Box>
+                    <Box>
+                        <List component='nav'>
+                            <ListItemButton onClick={toggleTheme}>
+                                <ListItemIcon>
+                                    <Icon>{themeName === 'light' ? 'dark' : 'light'}_mode</Icon>
+                                </ListItemIcon>
+                                <ListItemText primary="Alterar tema" />
+                            </ListItemButton>
                         </List>
                     </Box>
 

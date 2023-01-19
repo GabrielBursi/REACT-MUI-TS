@@ -1,4 +1,4 @@
-export type BarraDeFerramentasProps = {
+export type FerramentasDaListagemProps = {
     textoDaBusca?: string;
     mostrarInputBusca?: boolean;
     aoMudarTextoDeBusca?: (novoTexto: string) => void;

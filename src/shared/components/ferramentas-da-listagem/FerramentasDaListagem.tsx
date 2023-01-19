@@ -1,8 +1,15 @@
 import { Box, Button, Icon, Paper, TextField, useTheme } from "@mui/material";
 
-import { BarraDeFerramentasProps } from "../../../types";
+import { FerramentasDaListagemProps } from "../../../types";
 
-function BarraDeFerramentas({ aoMudarTextoDeBusca, mostrarInputBusca = false, textoDaBusca = '', aoClicarEmNovo, mostrarBotaoNovo = true, textoBotaoNovo = 'Novo' }: BarraDeFerramentasProps) {
+function FerramentasDaListagem({ 
+    aoMudarTextoDeBusca, 
+    mostrarInputBusca = false, 
+    textoDaBusca = '', 
+    aoClicarEmNovo, 
+    mostrarBotaoNovo = true, 
+    textoBotaoNovo = 'Novo' 
+}: FerramentasDaListagemProps) {
 
     const theme = useTheme()
     
@@ -42,4 +49,4 @@ function BarraDeFerramentas({ aoMudarTextoDeBusca, mostrarInputBusca = false, te
     );
 }
 
-export default BarraDeFerramentas;
+export default FerramentasDaListagem;

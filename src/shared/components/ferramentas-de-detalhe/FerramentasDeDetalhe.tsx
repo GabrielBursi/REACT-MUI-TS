@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Icon, Paper, Skeleton, useTheme } from "@mui/material";
+import { Box, Button, Divider, Icon, Paper, Skeleton, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { FerramentasDeDetalheProps } from "../../../types";
 
 function FerramentasDeDetalhe({
@@ -25,6 +25,8 @@ function FerramentasDeDetalhe({
 }: FerramentasDeDetalheProps) {
 
     const theme = useTheme()
+    const smDown = useMediaQuery(theme.breakpoints.down('sm'))
+    const mdDown = useMediaQuery(theme.breakpoints.down('md'))
 
     return (
         <Box
@@ -45,7 +47,10 @@ function FerramentasDeDetalhe({
                     startIcon={<Icon>save</Icon>}
                     onClick={aoClicarEmSalvar}
                 >
-                    Salvar
+                    <Typography variant="button" textOverflow="ellipsis" overflow="hidden" whiteSpace="nowrap"> 
+                        
+                        Salvar
+                    </Typography>
                 </Button>
             )}
 
@@ -53,7 +58,7 @@ function FerramentasDeDetalhe({
                 <Skeleton width={110} height={60}/>
             )}
 
-            {(mostrarBotaoSalvarEFechar && !mostrarBotaoSalvarEFecharSkeleton ) && (
+            {(mostrarBotaoSalvarEFechar && !mostrarBotaoSalvarEFecharSkeleton && !smDown && !mdDown) && (
                 <Button
                     color="primary"
                     disableElevation
@@ -61,11 +66,14 @@ function FerramentasDeDetalhe({
                     startIcon={<Icon>save</Icon>}
                     onClick={aoClicarEmSalvarEFechar}
                 >
-                    Salvar e Voltar
+                    <Typography variant="button" textOverflow="ellipsis" overflow="hidden" whiteSpace="nowrap">
+                        
+                        Salvar e Voltar
+                    </Typography>
                 </Button>
             )}
 
-            {mostrarBotaoSalvarEFecharSkeleton && (
+            {(mostrarBotaoSalvarEFecharSkeleton && !smDown && !mdDown) && (
                 <Skeleton width={180} height={60}/>
             )}
 
@@ -77,7 +85,10 @@ function FerramentasDeDetalhe({
                     startIcon={<Icon>delete</Icon>}
                     onClick={aoClicarEmApagar}
                 >
-                    Apagar
+                    <Typography variant="button" textOverflow="ellipsis" overflow="hidden" whiteSpace="nowrap"> 
+                        
+                        Apagar
+                    </Typography>
                 </Button>
             )}
 
@@ -85,7 +96,7 @@ function FerramentasDeDetalhe({
                 <Skeleton width={110} height={60}/>
             )}
 
-            {(mostrarBotaoNovo && !mostrarBotaoNovoSkeleton) && (
+            {(mostrarBotaoNovo && !mostrarBotaoNovoSkeleton && !smDown) && (
                 <Button
                     color="primary"
                     disableElevation
@@ -93,7 +104,10 @@ function FerramentasDeDetalhe({
                     startIcon={<Icon>add</Icon>}
                     onClick={aoClicarEmNovo}
                 >
-                    {textoBotaoNovo}
+                    <Typography variant="button" textOverflow="ellipsis" overflow="hidden" whiteSpace="nowrap"> 
+                        
+                        {textoBotaoNovo}
+                    </Typography>
                 </Button>
             )}
 
@@ -101,7 +115,15 @@ function FerramentasDeDetalhe({
                 <Skeleton width={110} height={60}/>
             )}
 
-            <Divider variant="middle" orientation="vertical"/>
+            { 
+                (
+                    mostrarBotaoVoltar && (
+                        mostrarBotaoNovo || mostrarBotaoApagar || mostrarBotaoSalvar || mostrarBotaoSalvarEFechar
+                    )
+                ) &&(
+                    <Divider variant="middle" orientation="vertical"/>
+                )
+            }
 
             {(mostrarBotaoVoltar && !mostrarBotaoVoltarSkeleton) && (
                 <Button
@@ -111,7 +133,10 @@ function FerramentasDeDetalhe({
                     startIcon={<Icon>arrow_back</Icon>}
                     onClick={aoClicarEmVoltar}
                 >
-                    Voltar
+                    <Typography variant="button" textOverflow="ellipsis" overflow="hidden" whiteSpace="nowrap">
+                        
+                        Voltar
+                    </Typography>
                 </Button>
             )}
 

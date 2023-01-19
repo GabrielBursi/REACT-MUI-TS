@@ -5,6 +5,13 @@ export type FerramentasDeDetalheProps = {
     mostrarBotaoApagar?: boolean;
     mostrarBotaoSalvar?: boolean;
     mostrarBotaoSalvarEFechar?: boolean;
+
+    mostrarBotaoNovoSkeleton?: boolean;
+    mostrarBotaoVoltarSkeleton?: boolean;
+    mostrarBotaoApagarSkeleton?: boolean;
+    mostrarBotaoSalvarSkeleton?: boolean;
+    mostrarBotaoSalvarEFecharSkeleton?: boolean;
+
     aoClicarEmNovo?: () => void;
     aoClicarEmVoltar?: () => void;
     aoClicarEmApagar?: () => void

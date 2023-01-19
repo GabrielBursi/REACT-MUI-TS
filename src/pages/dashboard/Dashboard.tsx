@@ -3,7 +3,7 @@ import {LayoutBase} from '../../shared/layouts';
 
 function Dashboard() {
     return (
-        <LayoutBase titulo='Página inicial' barraDeFerramentas={<FerramentasDeDetalhe/>}>
+        <LayoutBase titulo='Página inicial' barraDeFerramentas={<FerramentasDeDetalhe mostrarBotaoSalvarEFechar/>}>
             <span>childreb</span>
         </LayoutBase>
     );

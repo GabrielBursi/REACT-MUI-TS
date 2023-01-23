@@ -1,4 +1,4 @@
-import { PessoasComTotalCount } from '../../../types';
+import { PessoasComTotalCount, DetalhePessoa } from '../../../types';
 import { Environment } from '../../environments'
 import Api from '../AxiosConfig'
 
@@ -22,20 +22,52 @@ async function getAll(page = 1, filter = ''):Promise<PessoasComTotalCount | Erro
     }
 }
 
-async function getById() {
+async function getById(id: number): Promise<DetalhePessoa | Error>{
+    try {
+        const { data } = await Api.get(`/pessoas/${id}`);
 
+        if (data) {
+            return data;
+        }
+
+        return new Error('Erro ao consultar o registro.');
+    } catch (error) {
+        console.error(error);
+        return new Error((error as { message: string }).message || 'Erro ao consultar o registro.');
+    }
 }
 
-async function create() {
+async function create(dados: Omit<DetalhePessoa, 'id'>): Promise < number | Error > {
+    try {
+        const { data } = await Api.post<DetalhePessoa>('/pessoas', dados);
 
+        if (data) {
+            return data.id;
+        }
+
+        return new Error('Erro ao criar o registro.');
+    } catch (error) {
+        console.error(error);
+        return new Error((error as { message: string }).message || 'Erro ao criar o registro.');
+    }
 }
 
-async function updateById() {
-
+async function updateById(id: number, dados: DetalhePessoa): Promise<void | Error> {
+    try {
+        await Api.put(`/pessoas/${id}`, dados);
+    } catch (error) {
+        console.error(error);
+        return new Error((error as { message: string }).message || 'Erro ao atualizar o registro.');
+    }
 }
 
-async function deleteById() {
-
+async function deleteById(id: number):Promise<void | Error>  {
+    try {
+        await Api.delete(`/pessoas/${id}`);
+    } catch (error) {
+        console.error(error);
+        return new Error((error as { message: string }).message || 'Erro ao apagar o registro.');
+    }
 }
 
 export {

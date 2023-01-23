@@ -1,6 +1,7 @@
 import { Box, Button, Icon, Paper, TextField, useTheme } from "@mui/material";
 
 import { FerramentasDaListagemProps } from "../../../types";
+import { Environment } from "../../environments";
 
 function FerramentasDaListagem({ 
     aoMudarTextoDeBusca, 
@@ -27,7 +28,7 @@ function FerramentasDaListagem({
             {mostrarInputBusca && (
                 <TextField
                     size="small"
-                    placeholder="Pesquisar..."
+                    placeholder={Environment.INPUT_DE_BUSCA}
                     value={textoDaBusca}
                     onChange={e => aoMudarTextoDeBusca?.(e.target.value)}
                 />

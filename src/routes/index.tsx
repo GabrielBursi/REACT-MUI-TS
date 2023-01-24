@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import {Dashboard, ListagemDeCidade} from "../pages/";
+import {Dashboard, ListagemDePessoas} from "../pages/";
 
 import { UseDrawerContext } from "../shared/contexts";
 
@@ -16,9 +16,9 @@ function AppRoutes() {
                 path: "/"
             },
             {
-                icon: "location_city",
-                label: "Cidades",
-                path: "/cidades"
+                icon: "people",
+                label: "Pessoas",
+                path: "/pessoas"
             }
         ])
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -27,7 +27,7 @@ function AppRoutes() {
     return (
         <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/cidades" element={<ListagemDeCidade />} />
+            <Route path="/pessoas" element={<ListagemDePessoas />} />
             <Route path="*" element={<Navigate to='/'/>}/>
         </Routes>
     );

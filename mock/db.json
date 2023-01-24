@@ -1,7 +1,11 @@
 {
     "pessoas": [
         {
-            "nome":"Gabriel"
+            "id":1,
+            "email": "gabriel@gmail.com",
+            "cidadeId": 1,
+            "nomeCompleto": "Gabriel"
+            
         }
     ]
 }

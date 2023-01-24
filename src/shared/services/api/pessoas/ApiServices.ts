@@ -1,6 +1,6 @@
-import { PessoasComTotalCount, DetalhePessoa } from '../../../types';
-import { Environment } from '../../environments'
-import Api from '../AxiosConfig'
+import { PessoasComTotalCount, DetalhePessoa } from '../../../../types';
+import { Environment } from '../../../environments'
+import Api from '../../AxiosConfig'
 
 async function getAll(page = 1, filter = ''):Promise<PessoasComTotalCount | Error>{
     try {
@@ -70,7 +70,7 @@ async function deleteById(id: number):Promise<void | Error>  {
     }
 }
 
-export {
+export const pessoasServices = {
     getAll,
     getById,
     create,

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { LinearProgress, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from "@mui/material";
+import { LinearProgress, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow } from "@mui/material";
 
 import { FerramentasDaListagem } from "../../shared/components";
 
@@ -26,24 +26,28 @@ function ListagemDePessoas() {
         return searchParams.get('busca') || ''
     }, [searchParams])
 
+    const pagina = useMemo(() => {
+        return Number(searchParams.get('pagina') || '1')
+    }, [searchParams])
+
     useEffect(() => {
         
         setIsLoading(true)
 
         debounce(async () => {
-            const res = await pessoasServices.getAll()
+            const data = await pessoasServices.getAll(pagina, busca)
             setIsLoading(false)
 
-            if(res instanceof Error){
-                alert(res.message)
+            if(data instanceof Error){
+                alert(data.message)  
             }else{
-                console.log(res);
+                console.log(data);
 
-                setRows(res.data)
-                setTotalCount(res.totalCount)
+                setRows(data.data)
+                setTotalCount(data.totalCount)
             }
         })
-    }, [busca]);
+    }, [busca, pagina]);
     
     return (
         <LayoutBase 
@@ -53,7 +57,7 @@ function ListagemDePessoas() {
                         mostrarInputBusca 
                         textoBotaoNovo="Nova"
                         textoDaBusca={busca}
-                        aoMudarTextoDeBusca={texto => setSearchParams({busca: texto}, {replace: true})}
+                        aoMudarTextoDeBusca={texto => setSearchParams({busca: texto, pagina: '1'}, {replace: true})}
                     />
                 }>
             <TableContainer component={Paper} variant="outlined" sx={{m: 2, width: 'auto'}}>
@@ -80,15 +84,26 @@ function ListagemDePessoas() {
                         <caption>{Environment.LISTAGEM_VAZIA}</caption>
                     )}
 
-                    {isLoading && (
-                        <TableFooter>
+                    <TableFooter>
+                        {isLoading && (
+                                <TableRow >
+                                    <TableCell colSpan={3}>
+                                            <LinearProgress variant="indeterminate"/>
+                                    </TableCell>
+                                </TableRow>
+                        )}
+                        {(totalCount > 0 && totalCount > Environment.LIMITE_DE_LINHAS) && (
                             <TableRow >
                                 <TableCell colSpan={3}>
-                                        <LinearProgress variant="indeterminate"/>
+                                    <Pagination 
+                                        page={pagina}
+                                        count={Math.ceil(totalCount / Environment.LIMITE_DE_LINHAS)} 
+                                        onChange={(_, newPage) => {setSearchParams({busca, pagina: newPage.toString()}, {replace:true})}}
+                                    />
                                 </TableCell>
                             </TableRow>
-                        </TableFooter>
-                    )}
+                        )}
+                    </TableFooter>
                 </Table>
             </TableContainer>
         </LayoutBase>

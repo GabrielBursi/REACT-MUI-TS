@@ -6,6 +6,18 @@
             "cidadeId": 1,
             "nomeCompleto": "Gabriel"
             
+        },{
+            "id":2,
+            "email": "gabriel@gmail.com",
+            "cidadeId": 1,
+            "nomeCompleto": "Bia"
+            
+        },{
+            "id":3,
+            "email": "gabriel@gmail.com",
+            "cidadeId": 1,
+            "nomeCompleto": "Aline"
+            
         }
     ]
 }

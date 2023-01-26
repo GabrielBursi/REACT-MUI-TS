@@ -1,7 +1,6 @@
-import { ppid } from "process";
 import { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import {Dashboard, ListagemDePessoas} from "../pages/";
+import {Dashboard, DetalheDePessoas, ListagemDePessoas} from "../pages/";
 
 import { UseDrawerContext } from "../shared/contexts";
 
@@ -29,7 +28,7 @@ function AppRoutes() {
         <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/pessoas" element={<ListagemDePessoas />} />
-            <Route path="/pessoas/detalhe/:id" element={<p>testre</p>} />
+            <Route path="/pessoas/detalhe/:id" element={<DetalheDePessoas/>} />
             <Route path="*" element={<Navigate to='/'/>}/>
         </Routes>
     );

@@ -1,5 +1,5 @@
 export type LayoutBaseProps = {
-    children: JSX.Element,
+    children: React.ReactNode,
     barraDeFerramentas? : JSX.Element
     titulo: string
 }

@@ -80,6 +80,7 @@ function ListagemDePessoas() {
                         textoBotaoNovo="Nova"
                         textoDaBusca={busca}
                         aoMudarTextoDeBusca={texto => setSearchParams({busca: texto, pagina: '1'}, {replace: true})}
+                        aoClicarEmNovo={() => navigate('/pessoas/detalhe/nova')}
                     />
                 }>
             <TableContainer component={Paper} variant="outlined" sx={{m: 2, width: 'auto'}}>

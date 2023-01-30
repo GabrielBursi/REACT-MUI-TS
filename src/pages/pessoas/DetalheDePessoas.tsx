@@ -1,7 +1,10 @@
 import { LinearProgress } from "@mui/material";
-import { useEffect, useState } from "react";
+import { FormHandles } from "@unform/core";
+import { Form } from "@unform/web";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FerramentasDeDetalhe } from "../../shared/components";
+import { VTextField } from "../../shared/forms";
 import { LayoutBase } from "../../shared/layouts";
 import { pessoasServices } from "../../shared/services/";
 
@@ -10,9 +13,11 @@ function DetalheDePessoas() {
     const {id = 'nova'} = useParams<'id'>()
     const navigate = useNavigate()
 
+    const formRef = useRef<FormHandles>(null);
+
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [nome, setNome] = useState<string>('');
-
+    
     useEffect(() => {
         setIsLoading(true)
         if( id !== 'nova' ){
@@ -24,14 +29,14 @@ function DetalheDePessoas() {
                         navigate('/pessoas')
                     }else{
                         setNome(res.nomeCompleto)
-                        console.log(res);
+                        formRef.current?.setData(res);
                     }
                 })
         }
     }, [id]);
 
-    function handleSave(){
-
+    function handleSave(dados: FormData){
+        console.log(dados);
     }
 
     function handleDelete(id:number){
@@ -60,20 +65,19 @@ function DetalheDePessoas() {
                     mostrarBotaoNovo={id !== 'nova'}
                     mostrarBotaoApagar={id !== 'nova'}
 
-                    aoClicarEmSalvar={() => { }}
-                    aoClicarEmSalvarEFechar={() => { }}
+                    aoClicarEmSalvar={() => formRef.current?.submitForm()}
+                    aoClicarEmSalvarEFechar={() => formRef.current?.submitForm()}
                     aoClicarEmNovo={() => { navigate('/pessoas/detalhe/nova') }}
                     aoClicarEmApagar={() => { handleDelete(Number(id)) }}
                     aoClicarEmVoltar={() => { navigate('/pessoas') }}
                 />
             }
         >
-
-            {isLoading && (
-                <LinearProgress variant="indeterminate"/>
-            )}
-
-            <p>{id}</p>
+            <Form ref={formRef} onSubmit={handleSave}>
+                <VTextField placeholder='Nome completo' name='nomeCompleto' />
+                <VTextField placeholder='Email' name='email' />
+                <VTextField placeholder='Cidade id' name='cidadeId' />
+            </Form>
         </LayoutBase>
     );
 }

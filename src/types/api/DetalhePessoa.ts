@@ -4,3 +4,5 @@ export type DetalhePessoa = {
     cidadeId: number;
     nomeCompleto: string;
 }
+
+export type FormData = Omit<DetalhePessoa, 'id'>

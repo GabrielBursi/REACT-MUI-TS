@@ -1,28 +1,26 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { Box, Grid, LinearProgress, Paper, Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { FormHandles } from "@unform/core";
-import { Form } from "@unform/web";
 import { FerramentasDeDetalhe } from "../../shared/components";
-import { VTextField } from "../../shared/forms";
+import { VTextField, VForm, useVForm } from "../../shared/forms";
 import { LayoutBase } from "../../shared/layouts";
 import { pessoasServices } from "../../shared/services/";
 import { TFormData } from "../../types";
-import { Box, Grid, LinearProgress, Paper, Typography } from "@mui/material";
 
 function DetalheDePessoas() {
 
     const {id = 'nova'} = useParams<'id'>()
     const navigate = useNavigate()
 
-    const formRef = useRef<FormHandles>(null);
+    const { formRef, save, saveAndClose, isSaveAndClose } = useVForm();
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [nome, setNome] = useState<string>('');
     
     useEffect(() => {
-        setIsLoading(true)
         if( id !== 'nova' ){
+            setIsLoading(true)
             pessoasServices.getById(Number(id))
                 .then(res => {
                     setIsLoading(false)
@@ -34,6 +32,12 @@ function DetalheDePessoas() {
                         formRef.current?.setData(res);
                     }
                 })
+        }else{
+            formRef.current?.setData({
+                email: '',
+                cidadeId: '',
+                nomeCompleto: '',
+            });
         }
     }, [id]);
 
@@ -43,13 +47,16 @@ function DetalheDePessoas() {
         if(id === 'nova'){
             
             pessoasServices.create(dados)
-                .then(data => {
+            .then(data => {
                     setIsLoading(false)
-
                     if(data instanceof Error){
                         alert(data.message)
                     }else{
-                        navigate(`/pessoas/detalhe/${data}`)
+                        if (isSaveAndClose()) {
+                            navigate('/pessoas');
+                        } else {
+                            navigate(`/pessoas/detalhe/${data}`);
+                        }
                     }
                 }) 
 
@@ -60,6 +67,10 @@ function DetalheDePessoas() {
 
                     if (data instanceof Error) {
                         alert(data.message)
+                    }else{
+                        if (isSaveAndClose()) {
+                            navigate('/pessoas');
+                        }
                     }
                 })
         }
@@ -91,23 +102,23 @@ function DetalheDePessoas() {
                     mostrarBotaoNovo={id !== 'nova'}
                     mostrarBotaoApagar={id !== 'nova'}
 
-                    aoClicarEmSalvar={() => formRef.current?.submitForm()}
-                    aoClicarEmSalvarEFechar={() => formRef.current?.submitForm()}
+                    aoClicarEmSalvar={save}
+                    aoClicarEmSalvarEFechar={saveAndClose}
                     aoClicarEmNovo={() => { navigate('/pessoas/detalhe/nova') }}
                     aoClicarEmApagar={() => { handleDelete(Number(id)) }}
                     aoClicarEmVoltar={() => { navigate('/pessoas') }}
                 />
             }
         >
-            <Form ref={formRef} onSubmit={handleSave}>
+            <VForm ref={formRef} onSubmit={handleSave}>
                 <Box margin={1} display="flex" flexDirection="column" component={Paper} variant="outlined">
 
                 <Grid container direction="column" padding={2} spacing={2}>
 
                     {isLoading && (
-                    <Grid item>
-                        <LinearProgress variant='indeterminate' />
-                    </Grid>
+                        <Grid item>
+                            <LinearProgress variant='indeterminate' />
+                        </Grid>
                     )}
 
                     <Grid item>
@@ -151,7 +162,7 @@ function DetalheDePessoas() {
                 </Grid>
 
                 </Box>
-            </Form>
+            </VForm>
         </LayoutBase>
     );
 }

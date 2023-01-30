@@ -11,6 +11,12 @@
       "email": "gabriel@gmail.com",
       "cidadeId": 1,
       "nomeCompleto": "Aline"
+    },
+    {
+      "nomeCompleto": "teste",
+      "email": "teste@teste.com",
+      "cidadeId": "1",
+      "id": 7
     }
   ]
 }

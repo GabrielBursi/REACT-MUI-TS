@@ -1,12 +1,13 @@
-import { LinearProgress } from "@mui/material";
-import { FormHandles } from "@unform/core";
-import { Form } from "@unform/web";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+
+import { FormHandles } from "@unform/core";
+import { Form } from "@unform/web";
 import { FerramentasDeDetalhe } from "../../shared/components";
 import { VTextField } from "../../shared/forms";
 import { LayoutBase } from "../../shared/layouts";
 import { pessoasServices } from "../../shared/services/";
+import { TFormData } from "../../types";
 
 function DetalheDePessoas() {
 
@@ -35,8 +36,32 @@ function DetalheDePessoas() {
         }
     }, [id]);
 
-    function handleSave(dados: FormData){
-        console.log(dados);
+    function handleSave(dados: TFormData){
+        setIsLoading(true)
+
+        if(id === 'nova'){
+            
+            pessoasServices.create(dados)
+                .then(data => {
+                    setIsLoading(false)
+
+                    if(data instanceof Error){
+                        alert(data.message)
+                    }else{
+                        navigate(`/pessoas/detalhe/${data}`)
+                    }
+                }) 
+
+        }else{
+            pessoasServices.updateById(Number(id), {id: Number(id), ...dados})
+                .then(data => {
+                    setIsLoading(false)
+
+                    if (data instanceof Error) {
+                        alert(data.message)
+                    }
+                })
+        }
     }
 
     function handleDelete(id:number){

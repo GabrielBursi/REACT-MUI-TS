@@ -5,4 +5,4 @@ export type DetalhePessoa = {
     nomeCompleto: string;
 }
 
-export type FormData = Omit<DetalhePessoa, 'id'>
+export type TFormData = Omit<DetalhePessoa, 'id'>

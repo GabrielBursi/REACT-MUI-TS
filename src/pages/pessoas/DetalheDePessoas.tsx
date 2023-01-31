@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
 import { Box, Grid, LinearProgress, Paper, Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
+import * as yup from 'yup';
 
 import { FerramentasDeDetalhe } from "../../shared/components";
 import { VTextField, VForm, useVForm } from "../../shared/forms";
 import { LayoutBase } from "../../shared/layouts";
 import { pessoasServices } from "../../shared/services/";
-import { TFormData } from "../../types";
+import { FormData, TVFormErrors } from "../../types";
+
+const formValidationSchema: yup.SchemaOf<FormData> = yup.object().shape({
+    cidadeId: yup.number().required(),
+    email: yup.string().required().email(),
+    nomeCompleto: yup.string().required('blabla').min(3),
+});
 
 function DetalheDePessoas() {
 
@@ -41,39 +48,53 @@ function DetalheDePessoas() {
         }
     }, [id]);
 
-    function handleSave(dados: TFormData){
-        setIsLoading(true)
+    function handleSave(dados: FormData){
+        formValidationSchema.validate(dados)
+            .then(dadosValidados => {
+                setIsLoading(true)
 
-        if(id === 'nova'){
-            
-            pessoasServices.create(dados)
-            .then(data => {
-                    setIsLoading(false)
-                    if(data instanceof Error){
-                        alert(data.message)
-                    }else{
-                        if (isSaveAndClose()) {
-                            navigate('/pessoas');
-                        } else {
-                            navigate(`/pessoas/detalhe/${data}`);
-                        }
-                    }
-                }) 
+                if(id === 'nova'){
+                    
+                    pessoasServices.create(dadosValidados)
+                    .then(data => {
+                            setIsLoading(false)
+                            if(data instanceof Error){
+                                alert(data.message)
+                            }else{
+                                if (isSaveAndClose()) {
+                                    navigate('/pessoas');
+                                } else {
+                                    navigate(`/pessoas/detalhe/${data}`);
+                                }
+                            }
+                        }) 
 
-        }else{
-            pessoasServices.updateById(Number(id), {id: Number(id), ...dados})
-                .then(data => {
-                    setIsLoading(false)
+                }else{
+                    pessoasServices.updateById(Number(id), {id: Number(id), ...dadosValidados})
+                        .then(data => {
+                            setIsLoading(false)
 
-                    if (data instanceof Error) {
-                        alert(data.message)
-                    }else{
-                        if (isSaveAndClose()) {
-                            navigate('/pessoas');
-                        }
-                    }
-                })
-        }
+                            if (data instanceof Error) {
+                                alert(data.message)
+                            }else{
+                                if (isSaveAndClose()) {
+                                    navigate('/pessoas');
+                                }
+                            }
+                        })
+                }
+            })
+            .catch((errors: yup.ValidationError) => {
+                
+                const validationErrors: TVFormErrors = {};
+                
+                errors.inner.forEach(error => {
+                    if (!error.path) return;
+                    
+                    validationErrors[error.path] = error.message;
+                });
+                formRef.current?.setErrors(validationErrors);
+            })
     }
 
     function handleDelete(id:number){

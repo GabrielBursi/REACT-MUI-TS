@@ -44,8 +44,6 @@ function ListagemDePessoas() {
             if(data instanceof Error){
                 alert(data.message)  
             }else{
-                console.log(data);
-
                 setRows(data.data)
                 setTotalCount(data.totalCount)
             }
@@ -87,7 +85,7 @@ function ListagemDePessoas() {
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Ações</TableCell>
+                            <TableCell width={100}>Ações</TableCell>
                             <TableCell>Nome Completo</TableCell>
                             <TableCell>Email</TableCell>
                         </TableRow>

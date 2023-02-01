@@ -8,11 +8,12 @@ import { VTextField, VForm, useVForm } from "../../shared/forms";
 import { LayoutBase } from "../../shared/layouts";
 import { pessoasServices } from "../../shared/services/";
 import { FormData, TVFormErrors } from "../../types";
+import AutoCompleteCidade from "./components/AutoCompleteCidade";
 
 const formValidationSchema: yup.SchemaOf<FormData> = yup.object().shape({
     cidadeId: yup.number().required(),
     email: yup.string().required().email(),
-    nomeCompleto: yup.string().required('blabla').min(3),
+    nomeCompleto: yup.string().required().min(3),
 });
 
 function DetalheDePessoas() {
@@ -42,8 +43,8 @@ function DetalheDePessoas() {
         }else{
             formRef.current?.setData({
                 email: '',
-                cidadeId: '',
                 nomeCompleto: '',
+                cidadeId: undefined,
             });
         }
     }, [id]);
@@ -171,12 +172,7 @@ function DetalheDePessoas() {
 
                     <Grid container item direction="row" spacing={2}>
                         <Grid item xs={12} sm={12} md={6} lg={4} xl={2}>
-                            <VTextField
-                            fullWidth
-                            label='Cidade'
-                            name='cidadeId'
-                            disabled={isLoading}
-                            />
+                            <AutoCompleteCidade isExternalLoading={isLoading}/>
                         </Grid>
                     </Grid>
 

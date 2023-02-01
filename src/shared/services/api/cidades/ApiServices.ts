@@ -1,4 +1,4 @@
-import { CidadesComTotalCount, DetalheCidade } from "../../../../types";
+import { CidadesComTotalCount, DetalheCidade } from "../../../../types/api";
 import { Environment } from "../../../environments";
 import Api from "../../AxiosConfig";
 

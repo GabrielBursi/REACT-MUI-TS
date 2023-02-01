@@ -1,5 +1,5 @@
 import { Box, Button, Divider, Icon, Paper, Skeleton, Typography, useMediaQuery, useTheme } from "@mui/material";
-import { FerramentasDeDetalheProps } from "../../../types";
+import { FerramentasDeDetalheProps } from "../../../types/props";
 
 function FerramentasDeDetalhe({
     textoBotaoNovo = "Novo",

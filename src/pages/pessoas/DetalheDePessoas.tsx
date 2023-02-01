@@ -7,7 +7,8 @@ import { FerramentasDeDetalhe } from "../../shared/components";
 import { VTextField, VForm, useVForm } from "../../shared/forms";
 import { LayoutBase } from "../../shared/layouts";
 import { pessoasServices } from "../../shared/services/";
-import { FormData, TVFormErrors } from "../../types";
+import { TVFormErrors } from "../../types/forms/TVFormErrors";
+import { FormData } from "../../types/api";
 import AutoCompleteCidade from "./components/AutoCompleteCidade";
 
 const formValidationSchema: yup.SchemaOf<FormData> = yup.object().shape({

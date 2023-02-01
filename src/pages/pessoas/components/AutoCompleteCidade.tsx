@@ -4,7 +4,7 @@ import { Autocomplete, CircularProgress, TextField } from '@mui/material';
 import { CidadesService } from '../../../shared/services/api/cidades/ApiServices';
 import { useDebounce } from '../../../shared/hooks';
 import { useField } from '@unform/core';
-import { AutoCompleteCidadeProps, AutoCompleteOption } from '../../../types';
+import { AutoCompleteCidadeProps, AutoCompleteOption } from '../../../types/props';
 
 
 function AutoCompleteCidade({ isExternalLoading = false }: AutoCompleteCidadeProps) {

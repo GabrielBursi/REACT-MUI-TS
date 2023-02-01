@@ -1,7 +1,7 @@
 import { Icon, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { useMatch, useNavigate, useResolvedPath } from 'react-router-dom';
 
-import { ListItemLinkProps } from '../../../types';
+import { ListItemLinkProps } from '../../../types/props';
 
 function ListItemLink({icon, label, to, onClick}: ListItemLinkProps) {
     

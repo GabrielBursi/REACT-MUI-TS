@@ -1,6 +1,6 @@
 import { Box, Button, Icon, Paper, TextField, useTheme } from "@mui/material";
 
-import { FerramentasDaListagemProps } from "../../../types";
+import { FerramentasDaListagemProps } from "../../../types/props";
 import { Environment } from "../../environments";
 
 function FerramentasDaListagem({ 

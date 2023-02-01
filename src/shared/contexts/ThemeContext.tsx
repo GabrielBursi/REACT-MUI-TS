@@ -2,7 +2,8 @@ import { ThemeProvider } from "@emotion/react";
 import { Box } from "@mui/material";
 import { createContext, useState, useCallback, useMemo, useContext } from "react";
 
-import { Children, ThemeContextData } from "../../types";
+import { ThemeContextData } from "../../types/contexts";
+import { Children } from "../../types/props";
 
 import { LightTheme, DarkTheme } from "../themes";
 

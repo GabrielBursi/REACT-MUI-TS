@@ -7,7 +7,9 @@ import { VTextField, VForm, useVForm, } from '../../shared/forms';
 import { FerramentasDeDetalhe } from '../../shared/components';
 import { LayoutBase } from '../../shared/layouts';
 import { CidadesService } from '../../shared/services';
-import { FormDataCidade, TVFormErrors } from '../../types';
+
+import { FormDataCidade } from '../../types/api';
+import { TVFormErrors } from '../../types/forms/TVFormErrors';
 
 
 const formValidationSchema: yup.SchemaOf<FormDataCidade> = yup.object().shape({

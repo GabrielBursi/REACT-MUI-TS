@@ -1,6 +1,6 @@
 import { Icon, IconButton, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { Box } from "@mui/system";
-import { LayoutBaseProps } from "../../types";
+import { LayoutBaseProps } from "../../types/props";
 import { UseDrawerContext } from "../contexts";
 
 export default function LayoutBase({ children, titulo, barraDeFerramentas }: LayoutBaseProps) {

@@ -7,7 +7,7 @@ import { LayoutBase } from '../../shared/layouts';
 import { useDebounce } from '../../shared/hooks';
 import { CidadesService } from '../../shared/services';
 import { Environment } from '../../shared/environments';
-import { ListagemCidade } from '../../types';
+import { ListagemCidade } from '../../types/api';
 
 
 export default function ListagemDeCidades(){
@@ -76,7 +76,7 @@ export default function ListagemDeCidades(){
                     textoDaBusca={busca}
                     textoBotaoNovo='Nova'
                     aoClicarEmNovo={() => navigate('/cidades/detalhe/nova')}
-                    aoMudarTextoDeBusca={texto => setSearchParams({ busca: texto, pagina: '1' }, { replace: true })}
+                    aoMudarTextoDeBusca={(texto: string) => setSearchParams({ busca: texto, pagina: '1' }, { replace: true })}
                 />
             }
         >

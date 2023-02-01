@@ -1,4 +1,4 @@
-import { PessoasComTotalCount, DetalhePessoa } from '../../../../types';
+import { PessoasComTotalCount, DetalhePessoa } from '../../../../types/api';
 import { Environment } from '../../../environments'
 import Api from '../../AxiosConfig'
 

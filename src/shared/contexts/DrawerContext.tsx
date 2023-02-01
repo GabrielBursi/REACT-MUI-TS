@@ -1,6 +1,7 @@
 import { createContext, useState, useCallback, useContext } from "react";
 
-import { Children, DrawerContextData, DrawerOptions } from "../../types";
+import { DrawerContextData, DrawerOptions } from "../../types/contexts";
+import { Children } from "../../types/props";
 
 const DrawerContext = createContext({} as DrawerContextData)
 

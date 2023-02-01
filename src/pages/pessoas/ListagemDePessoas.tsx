@@ -11,7 +11,7 @@ import { LayoutBase } from "../../shared/layouts";
 
 import { pessoasServices } from "../../shared/services/api/pessoas/ApiServices";
 
-import { ListagemPessoa } from "../../types";
+import { ListagemPessoa } from "../../types/api";
 import { Environment } from "../../shared/environments";
 
 function ListagemDePessoas() {

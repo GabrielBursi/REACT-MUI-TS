@@ -1,7 +1,7 @@
 import { Avatar, Divider, Drawer,  Icon,  List, ListItemButton, ListItemIcon, ListItemText, useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 
-import { Children } from '../../../types';
+import { Children } from '../../../types/props';
 
 import { UseDrawerContext, UseThemeContext } from '../../contexts/';
 import ListItemLink from './ListItemLink';

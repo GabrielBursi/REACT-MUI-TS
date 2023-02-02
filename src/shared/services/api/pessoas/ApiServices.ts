@@ -70,7 +70,7 @@ async function deleteById(id: number):Promise<void | Error>  {
     }
 }
 
-export const pessoasServices = {
+export const PessoasService = {
     getAll,
     getById,
     create,

@@ -6,7 +6,7 @@ import * as yup from 'yup';
 import { FerramentasDeDetalhe } from "../../shared/components";
 import { VTextField, VForm, useVForm } from "../../shared/forms";
 import { LayoutBase } from "../../shared/layouts";
-import { pessoasServices } from "../../shared/services/";
+import { PessoasService } from "../../shared/services/";
 import { TVFormErrors } from "../../types/forms/TVFormErrors";
 import { FormData } from "../../types/api";
 import AutoCompleteCidade from "./components/AutoCompleteCidade";
@@ -30,7 +30,7 @@ function DetalheDePessoas() {
     useEffect(() => {
         if( id !== 'nova' ){
             setIsLoading(true)
-            pessoasServices.getById(Number(id))
+            PessoasService.getById(Number(id))
                 .then(res => {
                     setIsLoading(false)
                     if(res instanceof Error){
@@ -57,7 +57,7 @@ function DetalheDePessoas() {
 
                 if(id === 'nova'){
                     
-                    pessoasServices.create(dadosValidados)
+                    PessoasService.create(dadosValidados)
                     .then(data => {
                             setIsLoading(false)
                             if(data instanceof Error){
@@ -72,7 +72,7 @@ function DetalheDePessoas() {
                         }) 
 
                 }else{
-                    pessoasServices.updateById(Number(id), {id: Number(id), ...dadosValidados})
+                    PessoasService.updateById(Number(id), {id: Number(id), ...dadosValidados})
                         .then(data => {
                             setIsLoading(false)
 
@@ -102,7 +102,7 @@ function DetalheDePessoas() {
     function handleDelete(id:number){
         // eslint-disable-next-line no-restricted-globals
         if(confirm("Realmente deseja apagar?")){
-            pessoasServices.deleteById(Number(id))
+            PessoasService.deleteById(Number(id))
                 .then(res => {
                     if (res instanceof Error) {
                         alert(res.message)

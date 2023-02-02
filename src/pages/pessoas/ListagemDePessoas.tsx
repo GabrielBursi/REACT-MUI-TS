@@ -9,7 +9,7 @@ import {useDebounce} from "../../shared/hooks";
 
 import { LayoutBase } from "../../shared/layouts";
 
-import { pessoasServices } from "../../shared/services/api/pessoas/ApiServices";
+import { PessoasService } from "../../shared/services/api/pessoas/ApiServices";
 
 import { ListagemPessoa } from "../../types/api";
 import { Environment } from "../../shared/environments";
@@ -38,7 +38,7 @@ function ListagemDePessoas() {
         setIsLoading(true)
 
         debounce(async () => {
-            const data = await pessoasServices.getAll(pagina, busca)
+            const data = await PessoasService.getAll(pagina, busca)
             setIsLoading(false)
 
             if(data instanceof Error){
@@ -53,7 +53,7 @@ function ListagemDePessoas() {
     async function handleDelete(id: number){
         if(confirm("Realmente deseja apagar?")){
 
-            const res = await pessoasServices.deleteById(id)
+            const res = await PessoasService.deleteById(id)
 
             if(res instanceof Error){
                 alert(res.message)

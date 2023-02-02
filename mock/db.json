@@ -13,5 +13,10 @@
       "cidadeId": 1
     }
   ],
-  "cidades":[]
+  "cidades":[
+
+  ],
+  "auth": {
+    "accessToken": "aaaaaaaaaa.bbbbbbbbbb.cccccccc"
+  }
 }

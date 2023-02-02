@@ -3,7 +3,7 @@ import { Box } from '@mui/system';
 
 import { Children } from '../../../types/props';
 
-import { UseDrawerContext, UseThemeContext } from '../../contexts/';
+import { useAuthContext, UseDrawerContext, UseThemeContext } from '../../contexts/';
 import ListItemLink from './ListItemLink';
 
 function SideBar({children}: Children) {
@@ -13,6 +13,7 @@ function SideBar({children}: Children) {
 
     const { isDrawerOpen, toggleDrawer, drawerOptions } = UseDrawerContext()
     const { toggleTheme, themeName } = UseThemeContext()
+    const { logout } = useAuthContext();
 
     return (
         <>
@@ -51,6 +52,12 @@ function SideBar({children}: Children) {
                                     <Icon>{themeName === 'light' ? 'dark' : 'light'}_mode</Icon>
                                 </ListItemIcon>
                                 <ListItemText primary="Alterar tema" />
+                            </ListItemButton>
+                            <ListItemButton onClick={logout}>
+                                <ListItemIcon>
+                                    <Icon>logout</Icon>
+                                </ListItemIcon>
+                                <ListItemText primary="Sair" />
                             </ListItemButton>
                         </List>
                     </Box>

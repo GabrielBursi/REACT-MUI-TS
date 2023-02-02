@@ -1,4 +1,4 @@
-import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { Children } from '../../types/props';
 
 import { AuthService } from '../services/api/auth/AuthService';
@@ -51,3 +51,5 @@ export default function AuthProvider({ children }: Children){
         </AuthContext.Provider>
     )
 }
+
+export const useAuthContext = () => useContext(AuthContext);

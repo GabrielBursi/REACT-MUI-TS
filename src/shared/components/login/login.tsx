@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import { useAuthContext } from '../../contexts';
 import { Children } from '../../../types/props';
 
+import '../../forms/TraducoesYup'
 
 const loginSchema = yup.object().shape({
     email: yup.string().email().required(),
@@ -25,8 +26,12 @@ export default function Login({ children }:Children){
     const handleSubmit = () => {
         setIsLoading(true);
 
-        loginSchema
-            .validate({ email, password }, { abortEarly: false })
+        const dados = {
+            email,
+            password
+        }
+
+        loginSchema.validate(dados, { abortEarly: false })
             .then(dadosValidados => {
                 login(dadosValidados.email, dadosValidados.password)
                     .then(() => {

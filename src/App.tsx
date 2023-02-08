@@ -5,8 +5,6 @@ import {Login, SideBar} from "./shared/components";
 import { DrawerContextProvider, ThemeContextProvider } from "./shared/contexts";
 import AuthProvider from "./shared/contexts/AuthContext";
 
-import './shared/forms/TraducoesYup';
-
 function App() {
   return (
     <AuthProvider>

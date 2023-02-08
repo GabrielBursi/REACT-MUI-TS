@@ -11,6 +11,8 @@ import { TVFormErrors } from "../../types/forms/TVFormErrors";
 import { FormData } from "../../types/api";
 import AutoCompleteCidade from "./components/AutoCompleteCidade";
 
+import '../../shared/forms/TraducoesYup'
+
 const formValidationSchema: yup.SchemaOf<FormData> = yup.object().shape({
     cidadeId: yup.number().required(),
     email: yup.string().required().email(),
@@ -51,7 +53,7 @@ function DetalheDePessoas() {
     }, [id]);
 
     function handleSave(dados: FormData){
-        formValidationSchema.validate(dados)
+        formValidationSchema.validate(dados, {abortEarly: false})
             .then(dadosValidados => {
                 setIsLoading(true)
 

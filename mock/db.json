@@ -1,20 +1,17 @@
 {
   "pessoas": [
     {
-      "id": 5,
-      "nomeCompleto": "Aline",
-      "email": "aline@gmail.com",
-      "cidadeId": 1
-    },
-    {
-      "id": 6,
-      "nomeCompleto": "Gabriel",
-      "email": "gabriel@gmail.com",
+      "id": 1,
+      "nomeCompleto": "Teste",
+      "email": "teste@teste.com",
       "cidadeId": 1
     }
   ],
-  "cidades":[
-
+  "cidades": [
+    {
+      "name": "Maringa",
+      "id": 1
+    }
   ],
   "auth": {
     "accessToken": "aaaaaaaaaa.bbbbbbbbbb.cccccccc"

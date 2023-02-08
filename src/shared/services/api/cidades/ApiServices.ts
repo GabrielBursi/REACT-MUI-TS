@@ -4,10 +4,9 @@ import Api from "../../AxiosConfig";
 
 const getAll = async (page = 1, filter = ''): Promise<CidadesComTotalCount | Error> => {
     try {
-        const urlRelativa = `/cidades?_page=${page}&_limit=${Environment.LIMITE_DE_LINHAS}&nome_like=${filter}`;
+        const urlRelativa = `/cidades?_page=${page}&_limit=${Environment.LIMITE_DE_LINHAS}&id_like=${filter}`;
 
         const { data, headers } = await Api.get(urlRelativa);
-
         if (data) {
             return {
                 data,

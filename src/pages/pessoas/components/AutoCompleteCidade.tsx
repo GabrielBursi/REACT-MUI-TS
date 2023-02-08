@@ -37,8 +37,6 @@ function AutoCompleteCidade({ isExternalLoading = false }: AutoCompleteCidadePro
                     if (result instanceof Error) {
                         alert(result.message);
                     } else {
-                        console.log(result);
-
                         setOptions(result.data.map(cidade => ({ id: cidade.id, label: cidade.name })));
                     }
                 });

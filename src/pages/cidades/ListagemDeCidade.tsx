@@ -33,15 +33,13 @@ export default function ListagemDeCidades(){
         setIsLoading(true);
 
         debounce(() => {
-            CidadesService.getAll(pagina, busca)
+            CidadesService.getAll(1)
                 .then((result) => {
                     setIsLoading(false);
-
+                    
                     if (result instanceof Error) {
                         alert(result.message);
                     } else {
-                        console.log(result);
-
                         setTotalCount(result.totalCount);
                         setRows(result.data);
                     }

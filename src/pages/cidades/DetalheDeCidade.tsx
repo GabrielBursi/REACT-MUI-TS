@@ -11,6 +11,7 @@ import { CidadesService } from '../../shared/services';
 import { FormDataCidade } from '../../types/api';
 import { TVFormErrors } from '../../types/forms/TVFormErrors';
 
+import '../../shared/forms/TraducoesYup'
 
 const formValidationSchema: yup.SchemaOf<FormDataCidade> = yup.object().shape({
     name: yup.string().required().min(3),
@@ -23,7 +24,7 @@ export default function DetalheDeCidades(){
 
 
     const [isLoading, setIsLoading] = useState(false);
-    const [nome, setNome] = useState('');
+    const [name, setName] = useState('');
 
     useEffect(() => {
         if (id !== 'nova') {
@@ -37,21 +38,20 @@ export default function DetalheDeCidades(){
                         alert(result.message);
                         navigate('/cidades');
                     } else {
-                        setNome(result.name);
+                        setName(result.name);
                         formRef.current?.setData(result);
                     }
                 });
         } else {
             formRef.current?.setData({
-                nome: '',
+                name: '',
             });
         }
     }, [id]);
 
 
     const handleSave = (dados: FormDataCidade) => {
-        formValidationSchema.
-            validate(dados, { abortEarly: false })
+        formValidationSchema.validate(dados, { abortEarly: false })
             .then((dadosValidados) => {
                 setIsLoading(true);
 
@@ -118,7 +118,7 @@ export default function DetalheDeCidades(){
 
     return (
         <LayoutBase
-            titulo={id === 'nova' ? 'Nova cidade' : nome}
+            titulo={id === 'nova' ? 'Nova cidade' : name}
             barraDeFerramentas={
                 <FerramentasDeDetalhe
                     textoBotaoNovo='Nova'
@@ -153,10 +153,10 @@ export default function DetalheDeCidades(){
                             <Grid item xs={12} sm={12} md={6} lg={4} xl={2}>
                                 <VTextField
                                     fullWidth
-                                    name='nome'
+                                    name='name'
                                     label='Nome'
                                     disabled={isLoading}
-                                    onChange={e => setNome(e.target.value)}
+                                    onChange={e => setName(e.target.value)}
                                 />
                             </Grid>
                         </Grid>
